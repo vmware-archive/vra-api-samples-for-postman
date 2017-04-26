@@ -84,7 +84,7 @@ https://{{va-fqdn}}/catalog-service/api/consumer/resources?$filter=owners/ref eq
 
 ### Use Cases
 
-* Expand documentation of these use cases with [Postman's guidelines](https://www.getpostman.com/docs/creating_documentation.
+* Expand documentation of these use cases with [Postman's guidelines](https://www.getpostman.com/docs/creating_documentation).
 * Please read the respective README.md file for each folder what use case are provided as samples. 
 
 ## Contributing
