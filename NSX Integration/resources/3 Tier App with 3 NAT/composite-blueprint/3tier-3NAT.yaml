@@ -1,0 +1,333 @@
+id: 3tier3NAT
+name: 3tier-3NAT
+description: ''
+status: PUBLISHED
+properties:
+  __nsx.management_endpoint_name:
+    fixed: vCenter
+    required: false
+    secured: false
+    visible: false
+  __nsx.transport_zone_name:
+    fixed: Unicast-Transport-Zone
+    required: false
+    secured: false
+    visible: false
+components:
+  App-OnDemand-SG:
+    type: Infrastructure.Network.SecurityGroup.NSX.OnDemand
+    data:
+      endpoint: vCenter
+      name: App-OnDemand-SG
+      security_policies:
+      - name: SPO-App-Web
+  AppTier:
+    type: Infrastructure.CatalogItem.Machine.Virtual.vSphere
+    data:
+      _cluster:
+        default: 2
+        max: 2
+        min: 2
+      action:
+        fixed: FullClone
+      allow_storage_policies:
+        fixed: false
+      blueprint_type:
+        fixed: '0'
+      cpu:
+        default: 2
+        max: 2
+        min: 2
+      disks:
+      - capacity: 6
+        id: -1
+        initial_location: ''
+        is_clone: true
+        label: Hard disk 1
+        storage_reservation_policy: ''
+        userCreated: false
+        volumeId: 0
+      display_location:
+        fixed: false
+      guest_customization_specification: Linux
+      max_network_adapters: {}
+      max_volumes: {}
+      memory:
+        default: 512
+        max: 512
+        min: 512
+      nics:
+      - address: ''
+        assignment_type: Static
+        id: 0
+        load_balancing: ''
+        network: ${_resource~nat1mbordernetwork21}
+        network_profile: nat-1-m-border-network2-1
+      provisioning_workflow:
+        fixed:
+          id: CloneWorkflow
+          label: CloneWorkflow
+      security_groups:
+        - ${_resource~AppTierSG}
+        - ${_resource~App-OnDemand-SG}
+      security_tags: []
+      source_machine_name:
+        fixed: WebTinyCentOS65x86
+      storage:
+        default: 6
+        max: 6
+        min: 6
+  AppTierSG:
+    type: Infrastructure.Network.SecurityGroup.NSX.Existing
+    data:
+      endpoint: vCenter
+      name: ApplicationServers
+  DBTier:
+    type: Infrastructure.CatalogItem.Machine.Virtual.vSphere
+    data:
+      _cluster:
+        default: 1
+        max: 1
+        min: 1
+      action:
+        fixed: FullClone
+      allow_storage_policies:
+        fixed: false
+      blueprint_type:
+        fixed: '0'
+      cpu:
+        default: 1
+        max: 1
+        min: 1
+      disks:
+      - capacity: 1
+        id: -1
+        initial_location: ''
+        is_clone: true
+        label: Hard disk 1
+        storage_reservation_policy: ''
+        userCreated: false
+        volumeId: 0
+      display_location:
+        fixed: false
+      guest_customization_specification: Linux
+      max_network_adapters: {}
+      max_volumes: {}
+      memory:
+        default: 512
+        max: 512
+        min: 512
+      nics:
+      - address: ''
+        assignment_type: DHCP
+        id: 0
+        load_balancing: ''
+        network: ${_resource~nat1mbordernetwork22}
+        network_profile: nat-1-m-border-network2-2
+      provisioning_workflow:
+        fixed:
+          id: CloneWorkflow
+          label: CloneWorkflow
+      security_groups: []
+      security_tags:
+      - ${_resource~tag}
+      source_machine_name:
+        fixed: WebTinyCentOS65x86
+      storage:
+        default: 1
+        max: 1
+        min: 1
+  On-Demand-App-LB:
+    type: Infrastructure.Network.LoadBalancer.NSX.OnDemand
+    data:
+      name: App-LB
+      services:
+      - health_check_interval: 5
+        health_threshold: 5
+        id: HTTP
+        name: HTTP
+        port: 80
+        response_timeout: 5
+        service_URI: ''
+        unhealth_threshold: 10
+      - health_check_interval: 5
+        health_threshold: 5
+        id: HTTPS
+        name: HTTPS
+        port: 443
+        response_timeout: 5
+        service_URI: ''
+        unhealth_threshold: 10
+      - health_check_interval: 5
+        health_threshold: 5
+        id: TCP
+        name: TCP
+        port: 22
+        response_timeout: 5
+        service_URI: ''
+        unhealth_threshold: 10
+      tier: ${_resource~AppTier}
+      tier_nic_index: 0
+      vip_network: ${_resource~nat1mbordernetwork21}
+  On-Demand-Web-LB:
+    type: Infrastructure.Network.LoadBalancer.NSX.OnDemand
+    data:
+      name: Web-LB
+      services:
+      - health_check_interval: 5
+        health_threshold: 5
+        id: HTTP
+        name: HTTP
+        port: 80
+        response_timeout: 5
+        service_URI: ''
+        unhealth_threshold: 10
+      - health_check_interval: 5
+        health_threshold: 5
+        id: HTTPS
+        name: HTTPS
+        port: 443
+        response_timeout: 5
+        service_URI: ''
+        unhealth_threshold: 10
+      tier: ${_resource~WebTier}
+      tier_nic_index: 0
+      vip_network: ${_resource~externalbordernetwork2}
+  Web-OnDemand-SG:
+    type: Infrastructure.Network.SecurityGroup.NSX.OnDemand
+    data:
+      endpoint: vCenter
+      name: Web-OnDemand-SG
+      security_policies:
+      - name: SPO-Prod-Web
+  WebTier:
+    type: Infrastructure.CatalogItem.Machine.Virtual.vSphere
+    data:
+      _cluster:
+        default: 2
+        max: 2
+        min: 2
+      action:
+        fixed: FullClone
+      allow_storage_policies:
+        fixed: false
+      blueprint_type:
+        fixed: '0'
+      cpu:
+        default: 2
+        max: 2
+        min: 2
+      disks:
+      - capacity: 6
+        id: -1
+        initial_location: ''
+        is_clone: true
+        label: Hard disk 1
+        storage_reservation_policy: ''
+        userCreated: false
+        volumeId: 0
+      display_location:
+        fixed: false
+      guest_customization_specification: Linux
+      max_network_adapters: {}
+      max_volumes: {}
+      memory:
+        default: 512
+        max: 512
+        min: 512
+      nics:
+      - address: ''
+        assignment_type: Static
+        id: 0
+        load_balancing: ''
+        network: ${_resource~nat11bordernetwork21}
+        network_profile: nat-1-1-border-network2-1
+      provisioning_workflow:
+        fixed:
+          id: CloneWorkflow
+          label: CloneWorkflow
+      security_groups:
+      - ${_resource~WebTierSG}
+      - ${_resource~Web-OnDemand-SG}
+      security_tags: []
+      source_machine_name:
+        fixed: WebTinyCentOS65x86
+      storage:
+        default: 6
+        max: 6
+        min: 6
+  WebTierSG:
+    type: Infrastructure.Network.SecurityGroup.NSX.Existing
+    data:
+      endpoint: vCenter
+      name: WebServers
+  externalbordernetwork2:
+    type: Infrastructure.Network.Network.Existing
+    data:
+      name: externalbordernetwork2
+      network_profile: external-border-network-2
+  nat11bordernetwork21:
+    type: Infrastructure.Network.Network.NSX.OnDemand.NAT
+    data:
+      gateway:
+        fixed: 80.80.80.1
+      ip_ranges:
+        fixed:
+        - description: ''
+          end_ip: 80.80.80.250
+          externalId: ''
+          id: 2a84c81b-87bd-4e9e-a4d1-5dad984a3339
+          name: NAT-range-one-to-one-1
+          start_ip: 80.80.80.2
+      name: nat11bordernetwork21
+      parent_network_profile: nat-1-1-border-network2-1
+      subnet_mask:
+        fixed: 255.255.0.0
+  nat1mbordernetwork21:
+    type: Infrastructure.Network.Network.NSX.OnDemand.NAT
+    data:
+      gateway:
+        fixed: 10.10.10.1
+      ip_ranges:
+        fixed:
+        - description: ''
+          end_ip: 10.10.10.250
+          externalId: ''
+          id: 08d18ec9-14c5-4f93-ab46-923af8571020
+          name: NAT-range-one-to-many-1
+          start_ip: 10.10.10.2
+      name: nat1mbordernetwork21
+      parent_network_profile: nat-1-m-border-network2-1
+      subnet_mask:
+        fixed: 255.255.0.0
+  nat1mbordernetwork22:
+    type: Infrastructure.Network.Network.NSX.OnDemand.NAT
+    data:
+      gateway:
+        fixed: 20.20.20.1
+      ip_ranges:
+        fixed: []
+      name: nat1mbordernetwork22
+      parent_network_profile: nat-1-m-border-network2-2
+      subnet_mask:
+        fixed: 255.255.0.0
+  tag:
+    type: Infrastructure.Network.SecurityTag.NSX.Existing
+    data:
+      endpoint: vCenter
+      name: tag
+layout:
+  App-OnDemand-SG: 0,4
+  AppTier: 4,2
+  AppTierSG: 0,5
+  DBTier: 4,3
+  On-Demand-App-LB: 0,2
+  On-Demand-Web-LB: 0,1
+  Web-OnDemand-SG: 0,6
+  WebTier: 4,1
+  WebTierSG: 0,0
+  externalbordernetwork2: 1,0
+  nat11bordernetwork21: 2,0
+  nat1mbordernetwork21: 5,0
+  nat1mbordernetwork22: 3,0
+  tag: 0,3

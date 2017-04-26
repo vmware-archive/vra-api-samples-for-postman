@@ -1,0 +1,214 @@
+id: 2Routed
+name: 2Routed
+description: ''
+status: PUBLISHED
+properties:
+  __nsx.management_endpoint_name: vCenter
+  __nsx.transport_zone_name: Unicast-Transport-Zone
+components:
+  external-dlr-uplink2:
+    type: Infrastructure.Network.Network.Existing
+    data:
+      name: external-dlr-uplink2
+      network_profile: external-dlr-uplink2
+  routed-1:
+    type: Infrastructure.Network.Network.NSX.OnDemand.Routed
+    data:
+      external_profile: external-dlr-uplink2
+      name: routed-1
+      parent_network_profile: routed-1
+  routed-2:
+    type: Infrastructure.Network.Network.NSX.OnDemand.Routed
+    data:
+      external_profile: external-dlr-uplink2
+      name: routed-2
+      parent_network_profile: routed-2
+  sg-webserver-donotdelete:
+    type: Infrastructure.Network.SecurityGroup.NSX.Existing
+    data:
+      endpoint: vCenter
+      name: sg-webserver-donotdelete
+  tag:
+    type: Infrastructure.Network.SecurityTag.NSX.Existing
+    data:
+      endpoint: vCenter
+      name: tag
+  apptier:
+    type: Infrastructure.CatalogItem.Machine.Virtual.vSphere
+    data:
+      _cluster:
+        fixed: 2
+        min: 2
+      action:
+        fixed: FullClone
+      allow_storage_policies:
+        fixed: false
+      blueprint_type:
+        fixed: '1'
+      cpu:
+        fixed: 2
+        min: 2
+      disks:
+      - capacity: 6
+        id: -1
+        is_clone: true
+        label: Hard disk 1
+        userCreated: false
+        volumeId: 0
+      display_location: false
+      guest_customization_specification: Linux
+      max_network_adapters: {}
+      max_volumes: {}
+      memory:
+        fixed: 512
+        min: 512
+      nics:
+        fixed:
+        - address: ''
+          assignment_type: Static
+          id: 0
+          load_balancing: ''
+          network: ${_resource~routed-2}
+          network_profile: routed-2
+      provisioning_workflow:
+        fixed:
+          id: CloneWorkflow
+          label: CloneWorkflow
+      security_groups:
+      - ${_resource~sg-webserver-donotdelete}
+      security_tags:
+      - ${_resource~tag}
+      source_machine:
+        fixed:
+          id: a3b56817-64be-4454-a184-745cea5f3a47
+          label: WebTinyCentOS65x86
+      source_machine_name:
+        fixed: WebTinyCentOS65x86
+      storage:
+        fixed: 6
+        min: 6
+  webtier:
+    type: Infrastructure.CatalogItem.Machine.Virtual.vSphere
+    data:
+      _cluster:
+        fixed: 2
+        min: 2
+      action:
+        fixed: FullClone
+      allow_storage_policies:
+        fixed: false
+      blueprint_type:
+        fixed: '1'
+      cpu:
+        fixed: 2
+        min: 2
+      disks:
+      - capacity: 6
+        id: -1
+        is_clone: true
+        label: Hard disk 1
+        userCreated: false
+        volumeId: 0
+      display_location:
+        fixed: false
+      machine_prefix:
+        fixed:
+          id: Use group default
+      max_network_adapters: {}
+      max_volumes: {}
+      memory:
+        fixed: 512
+        min: 512
+      nics:
+        fixed:
+        - address: ''
+          assignment_type: Static
+          id: 0
+          load_balancing: ''
+          network: ${_resource~routed-1}
+          network_profile: routed-1
+      provisioning_workflow:
+        fixed:
+          id: CloneWorkflow
+          label: CloneWorkflow
+      security_groups:
+      - ${_resource~sg-webserver-donotdelete}
+      security_tags:
+      - ${_resource~tag}
+      guest_customization_specification: Linux
+      source_machine_name: WebTinyCentOS65x86
+      storage: 6
+  ApptierLB:
+    type: Infrastructure.Network.LoadBalancer.NSX.OnDemand
+    data:
+      name:
+        fixed: ApptierLB
+      services:
+        fixed:
+        - health_check_interval: 5
+          health_threshold: 5
+          id: HTTP
+          name: HTTP
+          port: 80
+          response_timeout: 5
+          service_URI: ''
+          unhealth_threshold: 10
+        - health_check_interval: 5
+          health_threshold: 5
+          id: HTTPS
+          name: HTTPS
+          port: 443
+          response_timeout: 5
+          service_URI: ''
+          unhealth_threshold: 10
+        - health_check_interval: 5
+          health_threshold: 5
+          id: TCP
+          name: TCP
+          port: 22
+          response_timeout: 5
+          service_URI: ''
+          unhealth_threshold: 10
+      tier:
+        fixed: ${_resource~apptier}
+      tier_nic_index:
+        fixed: 0
+      vip_network:
+        fixed: ${_resource~routed-2}
+  WebtierLB:
+    type: Infrastructure.Network.LoadBalancer.NSX.OnDemand
+    data:
+      name:
+        fixed: WebtierLB
+      services:
+        fixed:
+        - health_check_interval: 5
+          health_threshold: 5
+          id: HTTP
+          name: HTTP
+          port: 80
+          response_timeout: 5
+          service_URI: ''
+          unhealth_threshold: 10
+        - health_check_interval: 5
+          health_threshold: 5
+          id: HTTPS
+          name: HTTPS
+          port: 443
+          response_timeout: 5
+          service_URI: ''
+          unhealth_threshold: 10
+        - health_check_interval: 5
+          health_threshold: 5
+          id: TCP
+          name: TCP
+          port: 22
+          response_timeout: 5
+          service_URI: ''
+          unhealth_threshold: 10
+      tier:
+        fixed: ${_resource~webtier}
+      tier_nic_index:
+        fixed: 0
+      vip_network:
+        fixed: ${_resource~routed-1}

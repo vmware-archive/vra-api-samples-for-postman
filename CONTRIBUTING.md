@@ -2,8 +2,7 @@
 
 # Contributing to vra-api-samples-for-postman
 
-The vra-api-samples-for-postman project team welcomes contributions from the community. If you wish to contribute code and you have not
-signed our contributor license agreement (CLA), our bot will update the issue when you open a Pull Request. For any
+The vra-api-samples-for-postman project team welcomes contributions from the community. If you wish to contribute code and you have not signed our contributor license agreement (CLA), our bot will update the issue when you open a Pull Request. For any
 questions about the CLA process, please refer to our [FAQ](https://cla.vmware.com/faq).
 
 ## Community
@@ -76,8 +75,17 @@ Be sure to include any related GitHub issue references in the commit message.  S
 [GFM syntax](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) for referencing issues
 and commits.
 
+### Contribution Guidelines
+
+ * Make sure the use case you implement has all required body set. A blind copy of swagger import into Postman defeats the purpose of this repo.
+ * Modify existing README.md file to add your use case in the list or any instructions that are required. If new category needs to be added, add README.md for the category.
+ * Make sure the commit message is explicit enough.
+
 ## Reporting Bugs and Creating Issues
 
 When opening a new issue, try to roughly follow the commit message format conventions above.
 
-## Repository Structure
+You can submit a new issue for any of the following:
+
+ * Requesting new API samples
+ * Bugs in existing API samples

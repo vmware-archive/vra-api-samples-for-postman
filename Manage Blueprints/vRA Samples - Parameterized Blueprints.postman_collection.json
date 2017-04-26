@@ -1,0 +1,186 @@
+parameterized{
+	"variables": [],
+	"info": {
+		"name": "vRA Samples - Parameterized Blueprints",
+		"_postman_id": "71e830da-4a6b-c866-87c4-88a9e550d648",
+		"description": "Create Component Profile Value sets \"Medium\" and \"Small\" under Component Profile \"Size\" and associate the \"Small\" value set with the newly created blueprint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login with infra architect",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"Response contains auth token\"] = responseBody.has(\"id\");",
+							"postman.clearEnvironmentVariable(\"token\");",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"Auth token is not null\"] = data.id !== \"\";",
+							"postman.setEnvironmentVariable(\"token\", data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{va-fqdn}}/identity/api/tokens",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\",\"tenant\":\"{{tenant}}\"}"
+				},
+				"description": " Returns a token associated with the provided credentials. e.g. (username@domain)"
+			},
+			"response": []
+		},
+		{
+			"name": "Get ComponentProfile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{va-fqdn}}/composition-service/api/typeextensions/size",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "'@type': \"SoftwareComponentType\"\nid: \"Software.WindowsUpgrade\"\nname: \"WindowsUpgrade\"\npublishStatus: \"PUBLISHED\"\npublishStatusName: \"Published\"\nschema:\n  fields:\n  - id: \"agentJarSha256sum\"\n    label: \"agentJarSha256sum\"\n    description: \"\"\n    dataType:\n      type: \"primitive\"\n      typeId: \"STRING\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"defaultValue\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"string\"\n            value: \"\"\n    isMultiValued: false\n  - id: \"host\"\n    label: \"Container\"\n    description: \"\"\n    dataType:\n      type: \"ref\"\n      componentTypeId: \"com.vmware.csp.iaas.blueprint.service\"\n      classId: \"Infrastructure.Machine.Schema\"\n      label: \"Machine\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"internal\"\n        value:\n          type: \"constantClause\"\n          value:\n            type: \"boolean\"\n            value: true\n      - type: \"mandatory\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"boolean\"\n            value: true\n      - type: \"visible\"\n        value:\n          type: \"constantClause\"\n          value:\n            type: \"boolean\"\n            value: false\n    isMultiValued: false\n  - id: \"ipAddress\"\n    label: \"ipAddress\"\n    description: \"\"\n    dataType:\n      type: \"primitive\"\n      typeId: \"STRING\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"defaultValue\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"string\"\n            value: \"\"\n    isMultiValued: false\n  - id: \"cert\"\n    label: \"cert\"\n    description: \"\"\n    dataType:\n      type: \"primitive\"\n      typeId: \"STRING\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"defaultValue\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"string\"\n            value: \"\"\n    isMultiValued: false\ncontainerFieldId: \"host\"\nlifecycleTasks:\n- script:\n    scriptContent: \"$appd_properties = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.properties\\\"\\\n      \\n$appd_properties_backup = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.orig.properties\\\"\\\n      \\n$appd_temp1_properties = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.temp1.properties\\\"\\\n      \\n$appd_temp2_properties = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.temp2.properties\\\"\\\n      \\n\\nNew-Item -type directory ..\\\\REBOOT\\\\\\n\\n$REBOOT = @\\\"\\n{\\n \\\"__class\\\"\\\n      :\\\"com.vmware.darwin.agent.bean.RebootMarker\\\",\\n \\\"routingKey\\\":\\\"vmware.vcac.core.software.queue.task.state.update\\\"\\\n      ,\\n \\\"scriptExecResult\\\":\\n {\\n \\\"__class\\\":\\\"com.vmware.darwin.agent.domain.AgentScriptExecutionResult\\\"\\\n      ,\\n \\\"id\\\":\\\"$APPD_RUN_IDENTIFIER\\\",\\n \\\"descriptor\\\":\\\"INSTALL\\\",\\n \\\"status\\\"\\\n      :\\\"REBOOTING\\\",\\n \\\"logMessage\\\":\\\"LOG MESSAGE\\\",\\n \\\"logDescription\\\":\\\"LOG\\\n      \\ DESCRIPTION\\\",\\n \\\"overwriteLog\\\":false,\\n \\\"outputProperties\\\":[]\\n }\\n}\\n\\\n      \\\"@\\n$REBOOT | Out-File -encoding \\\"UTF8\\\" \\\"..\\\\REBOOT\\\\upgrade.reboot\\\"\\n\\n\\\n      Remove-Item $appd_temp1_properties\\nRemove-Item $appd_temp2_properties\\ncp $appd_properties\\\n      \\ $appd_properties_backup\\ncp $appd_properties $appd_temp1_properties\\n\\n$new_software_ebs_url\\\n      \\ = Get-Content $appd_properties | \\nSelect-String \\\"software.ebs.url\\\" -CaseSensitive\\\n      \\ | Select-Object -ExpandProperty line | \\nForeach-Object {$_ -replace \\\"(software.ebs.url)=(.*)\\\"\\\n      ,('$2')} | \\nForeach-Object {$_ -replace \\\"(\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3}\\\\\\\n      .\\\\d{1,3})\\\", $ipAddress}\\n\\nIf ($cert -ne $Null -and $cert -ne '') {\\n   Get-Content\\\n      \\ $appd_properties | \\n   %{$_ -replace \\\"(software.agent.service.cert)=(.*)\\\"\\\n      ,('$1=$2,'+$cert)} | \\n   %{$_ -replace \\\"(agent.jar.sha256sum)=(.*)\\\",('$1='+$agentJarSha256sum)}\\\n      \\ | \\n   Out-File -encoding \\\"UTF8\\\" \\\"$appd_temp1_properties\\\"\\n}\\n\\nIf ($ipAddress\\\n      \\ -ne $Null -and $ipAddress -ne '') {\\n   Get-Content $appd_temp1_properties\\\n      \\ | \\n   Foreach-Object {$_ -replace \\\"(software.ebs.url)=(.*)\\\",('$1=$2,'+$new_software_ebs_url)}\\\n      \\ | \\n   Foreach-Object {$_ -replace \\\"(agent.download.url)=(https?:\\\\/\\\\/)(\\\\\\\n      d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3})\\\", ('${1}=${2}'+$ipAddress)} | \\n \\\n      \\  Foreach-Object {$_ -replace \\\"(software.agent.service.url)=(https?:\\\\/\\\\\\\n      /)(\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3})\\\", ('${1}=${2}'+$ipAddress)} |\\\n      \\ \\n   Out-File -encoding \\\"UTF8\\\" \\\"$appd_temp2_properties\\\"\\n}\\n\\nIf (Test-Path\\\n      \\ \\\"$appd_temp2_properties\\\") {\\n   cp $appd_temp2_properties $appd_properties\\n\\\n      } Else {\\n   cp $appd_temp1_properties $appd_properties\\n}\\n\\nWrite-Host \\\"\\\n      Break0\\\"\\n$JavaProcess = Get-WmiObject Win32_Process -Filter \\\"name = 'java.exe'\\\"\\\n      \\ | Where-Object {$_.CommandLine -like \\\"*nobel-agent*\\\"}\\nWrite-Host \\\"Stopping\\\"\\\n      \\nStop-Process -Id $JavaProcess.ProcessId -Force\\nWrite-Host \\\"Break1\\\"\\nStop-Service\\\n      \\ vRASoftwareAgentBootstrap\\nWrite-Host \\\"Break2\\\"\\nStart-Sleep 5\\nWrite-Host\\\n      \\ \\\"Break3\\\"\\nRemove-Item -Force c:\\\\opt\\\\vmware-appdirector\\\\agent\\\\nobel-agent.jar\\n\\\n      Write-Host \\\"Break4\\\"\\nRemove-Item -Force c:\\\\opt\\\\vmware-appdirector\\\\agent\\\\\\\n      keystore\\\\agent.truststore\\nWrite-Host \\\"Break5\\\"\\nStart-Service vRASoftwareAgentBootstrap\\n\\\n      Write-Host \\\"Break6\\\"\"\n    isRebootAfter: false\n    scriptTypeId: \"powershell\"\n  taskDescriptorRef:\n    id: \"INSTALL\"\n    label: \"Install\""
+				},
+				"description": "Retrieve component type extension value list of a component type extension in the tenant and global scope."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Component Profile Value Lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{va-fqdn}}/composition-service/api/typeextensions/size/values",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"name\": \"ValueSet.Small\",\n    \"label\": \"Small\",\n    \"description\": \"Small valueset\",\n    \"valuesMap\": {\n      \"entries\": [\n        {\n          \"key\": \"cpu\",\n          \"value\": {\n            \"type\": \"integer\",\n            \"value\": 1\n          }\n        },\n        {\n          \"key\": \"storage\",\n          \"value\": {\n            \"type\": \"integer\",\n            \"value\": 2\n          }\n        },\n        {\n          \"key\": \"memory\",\n          \"value\": {\n            \"type\": \"integer\",\n            \"value\": 512\n          }\n        }\n      ]\n    },\n    \"isEnabled\": true\n  },\n  {\n    \"name\": \"ValueSet.Medium\",\n    \"label\": \"Medium\",\n    \"description\": \"Medium valueset\",\n    \"valuesMap\": {\n      \"entries\": [\n        {\n          \"key\": \"cpu\",\n          \"value\": {\n            \"type\": \"integer\",\n            \"value\": 2\n          }\n        },\n        {\n          \"key\": \"storage\",\n          \"value\": {\n            \"type\": \"integer\",\n            \"value\": 8\n          }\n        },\n        {\n          \"key\": \"memory\",\n          \"value\": {\n            \"type\": \"integer\",\n            \"value\": 4\n          }\n        }\n      ]\n    },\n    \"isEnabled\": true\n  }\n]"
+				},
+				"description": "Update component type extension value list of a component type extension. The list of component type extension values in the given tenant scope are updated."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Component Profile Value Lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{va-fqdn}}/composition-service/api/typeextensions/size/values",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "'@type': \"SoftwareComponentType\"\nid: \"Software.WindowsUpgrade\"\nname: \"WindowsUpgrade\"\npublishStatus: \"PUBLISHED\"\npublishStatusName: \"Published\"\nschema:\n  fields:\n  - id: \"agentJarSha256sum\"\n    label: \"agentJarSha256sum\"\n    description: \"\"\n    dataType:\n      type: \"primitive\"\n      typeId: \"STRING\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"defaultValue\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"string\"\n            value: \"\"\n    isMultiValued: false\n  - id: \"host\"\n    label: \"Container\"\n    description: \"\"\n    dataType:\n      type: \"ref\"\n      componentTypeId: \"com.vmware.csp.iaas.blueprint.service\"\n      classId: \"Infrastructure.Machine.Schema\"\n      label: \"Machine\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"internal\"\n        value:\n          type: \"constantClause\"\n          value:\n            type: \"boolean\"\n            value: true\n      - type: \"mandatory\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"boolean\"\n            value: true\n      - type: \"visible\"\n        value:\n          type: \"constantClause\"\n          value:\n            type: \"boolean\"\n            value: false\n    isMultiValued: false\n  - id: \"ipAddress\"\n    label: \"ipAddress\"\n    description: \"\"\n    dataType:\n      type: \"primitive\"\n      typeId: \"STRING\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"defaultValue\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"string\"\n            value: \"\"\n    isMultiValued: false\n  - id: \"cert\"\n    label: \"cert\"\n    description: \"\"\n    dataType:\n      type: \"primitive\"\n      typeId: \"STRING\"\n    state:\n      dependencies: []\n      facets:\n      - type: \"defaultValue\"\n        value:\n          type: \"constant\"\n          value:\n            type: \"string\"\n            value: \"\"\n    isMultiValued: false\ncontainerFieldId: \"host\"\nlifecycleTasks:\n- script:\n    scriptContent: \"$appd_properties = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.properties\\\"\\\n      \\n$appd_properties_backup = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.orig.properties\\\"\\\n      \\n$appd_temp1_properties = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.temp1.properties\\\"\\\n      \\n$appd_temp2_properties = \\\"C:\\\\opt\\\\vmware-appdirector\\\\agent\\\\appd.temp2.properties\\\"\\\n      \\n\\nNew-Item -type directory ..\\\\REBOOT\\\\\\n\\n$REBOOT = @\\\"\\n{\\n \\\"__class\\\"\\\n      :\\\"com.vmware.darwin.agent.bean.RebootMarker\\\",\\n \\\"routingKey\\\":\\\"vmware.vcac.core.software.queue.task.state.update\\\"\\\n      ,\\n \\\"scriptExecResult\\\":\\n {\\n \\\"__class\\\":\\\"com.vmware.darwin.agent.domain.AgentScriptExecutionResult\\\"\\\n      ,\\n \\\"id\\\":\\\"$APPD_RUN_IDENTIFIER\\\",\\n \\\"descriptor\\\":\\\"INSTALL\\\",\\n \\\"status\\\"\\\n      :\\\"REBOOTING\\\",\\n \\\"logMessage\\\":\\\"LOG MESSAGE\\\",\\n \\\"logDescription\\\":\\\"LOG\\\n      \\ DESCRIPTION\\\",\\n \\\"overwriteLog\\\":false,\\n \\\"outputProperties\\\":[]\\n }\\n}\\n\\\n      \\\"@\\n$REBOOT | Out-File -encoding \\\"UTF8\\\" \\\"..\\\\REBOOT\\\\upgrade.reboot\\\"\\n\\n\\\n      Remove-Item $appd_temp1_properties\\nRemove-Item $appd_temp2_properties\\ncp $appd_properties\\\n      \\ $appd_properties_backup\\ncp $appd_properties $appd_temp1_properties\\n\\n$new_software_ebs_url\\\n      \\ = Get-Content $appd_properties | \\nSelect-String \\\"software.ebs.url\\\" -CaseSensitive\\\n      \\ | Select-Object -ExpandProperty line | \\nForeach-Object {$_ -replace \\\"(software.ebs.url)=(.*)\\\"\\\n      ,('$2')} | \\nForeach-Object {$_ -replace \\\"(\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3}\\\\\\\n      .\\\\d{1,3})\\\", $ipAddress}\\n\\nIf ($cert -ne $Null -and $cert -ne '') {\\n   Get-Content\\\n      \\ $appd_properties | \\n   %{$_ -replace \\\"(software.agent.service.cert)=(.*)\\\"\\\n      ,('$1=$2,'+$cert)} | \\n   %{$_ -replace \\\"(agent.jar.sha256sum)=(.*)\\\",('$1='+$agentJarSha256sum)}\\\n      \\ | \\n   Out-File -encoding \\\"UTF8\\\" \\\"$appd_temp1_properties\\\"\\n}\\n\\nIf ($ipAddress\\\n      \\ -ne $Null -and $ipAddress -ne '') {\\n   Get-Content $appd_temp1_properties\\\n      \\ | \\n   Foreach-Object {$_ -replace \\\"(software.ebs.url)=(.*)\\\",('$1=$2,'+$new_software_ebs_url)}\\\n      \\ | \\n   Foreach-Object {$_ -replace \\\"(agent.download.url)=(https?:\\\\/\\\\/)(\\\\\\\n      d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3})\\\", ('${1}=${2}'+$ipAddress)} | \\n \\\n      \\  Foreach-Object {$_ -replace \\\"(software.agent.service.url)=(https?:\\\\/\\\\\\\n      /)(\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3}\\\\.\\\\d{1,3})\\\", ('${1}=${2}'+$ipAddress)} |\\\n      \\ \\n   Out-File -encoding \\\"UTF8\\\" \\\"$appd_temp2_properties\\\"\\n}\\n\\nIf (Test-Path\\\n      \\ \\\"$appd_temp2_properties\\\") {\\n   cp $appd_temp2_properties $appd_properties\\n\\\n      } Else {\\n   cp $appd_temp1_properties $appd_properties\\n}\\n\\nWrite-Host \\\"\\\n      Break0\\\"\\n$JavaProcess = Get-WmiObject Win32_Process -Filter \\\"name = 'java.exe'\\\"\\\n      \\ | Where-Object {$_.CommandLine -like \\\"*nobel-agent*\\\"}\\nWrite-Host \\\"Stopping\\\"\\\n      \\nStop-Process -Id $JavaProcess.ProcessId -Force\\nWrite-Host \\\"Break1\\\"\\nStop-Service\\\n      \\ vRASoftwareAgentBootstrap\\nWrite-Host \\\"Break2\\\"\\nStart-Sleep 5\\nWrite-Host\\\n      \\ \\\"Break3\\\"\\nRemove-Item -Force c:\\\\opt\\\\vmware-appdirector\\\\agent\\\\nobel-agent.jar\\n\\\n      Write-Host \\\"Break4\\\"\\nRemove-Item -Force c:\\\\opt\\\\vmware-appdirector\\\\agent\\\\\\\n      keystore\\\\agent.truststore\\nWrite-Host \\\"Break5\\\"\\nStart-Service vRASoftwareAgentBootstrap\\n\\\n      Write-Host \\\"Break6\\\"\"\n    isRebootAfter: false\n    scriptTypeId: \"powershell\"\n  taskDescriptorRef:\n    id: \"INSTALL\"\n    label: \"Install\""
+				},
+				"description": "Retrieve component type extension value list of a component type extension in the tenant and global scope."
+			},
+			"response": []
+		},
+		{
+			"name": "Create a blueprint with Component Profiles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{va-fqdn}}/composition-service/api/blueprints",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tenantId\": \"{{tenant}}\",\r\n  \"name\": \"{{blueprintName}}\",\r\n  \"version\": 1,\r\n  \"description\": \"\",\r\n  \"publishStatus\": \"PUBLISHED\",\r\n  \"publishStatusName\": \"PUBLISHED\",\r\n  \"components\": {\r\n    \"vSphere_Machine_1\": {\r\n      \"data\": {\r\n        \"storage\": {\r\n          \"facets\": {\r\n            \"readOnly\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"boolean\",\r\n                \"value\": true\r\n              }\r\n            },\r\n            \"maxValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 3\r\n              }\r\n            },\r\n            \"minValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 3\r\n              }\r\n            },\r\n            \"defaultValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 3\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"_cluster\": {\r\n          \"facets\": {\r\n            \"maxValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 1\r\n              }\r\n            },\r\n            \"minValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 1\r\n              }\r\n            },\r\n            \"defaultValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 1\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"action\": {\r\n          \"facets\": {\r\n            \"fixedValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"string\",\r\n                \"value\": \"Create\"\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"blueprint_type\": {\r\n          \"facets\": {\r\n            \"fixedValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"string\",\r\n                \"value\": \"1\"\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"cpu\": {\r\n          \"facets\": {\r\n            \"maxValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 1\r\n              }\r\n            },\r\n            \"readOnly\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"boolean\",\r\n                \"value\": true\r\n              }\r\n            },\r\n            \"minValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 1\r\n              }\r\n            },\r\n            \"defaultValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 1\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"memory\": {\r\n          \"facets\": {\r\n            \"maxValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 4096\r\n              }\r\n            },\r\n            \"readOnly\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"boolean\",\r\n                \"value\": true\r\n              }\r\n            },\r\n            \"minValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 4096\r\n              }\r\n            },\r\n            \"defaultValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"integer\",\r\n                \"value\": 4096\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"provisioning_workflow\": {\r\n          \"facets\": {\r\n            \"fixedValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"entityRef\",\r\n                \"classId\": \"Infrastructure.Compute.ProvisioningWorkflow\",\r\n                \"id\": \"BasicVmWorkflow\",\r\n                \"componentId\": null,\r\n                \"label\": \"BasicVmWorkflow\"\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"disks\": {\r\n          \"facets\": {\r\n            \"defaultValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"multiple\",\r\n                \"elementTypeId\": \"COMPLEX\",\r\n                \"items\": [\r\n                  {\r\n                    \"type\": \"complex\",\r\n                    \"componentTypeId\": \"com.vmware.csp.iaas.blueprint.service\",\r\n                    \"componentId\": null,\r\n                    \"classId\": \"Infrastructure.Compute.Machine.MachineDisk\",\r\n                    \"typeFilter\": null,\r\n                    \"values\": {\r\n                      \"entries\": [\r\n                        {\r\n                          \"key\": \"is_clone\",\r\n                          \"value\": {\r\n                            \"type\": \"boolean\",\r\n                            \"value\": false\r\n                          }\r\n                        },\r\n                        {\r\n                          \"key\": \"initial_location\",\r\n                          \"value\": {\r\n                            \"type\": \"string\",\r\n                            \"value\": \"C:\"\r\n                          }\r\n                        },\r\n                        {\r\n                          \"key\": \"volumeId\",\r\n                          \"value\": {\r\n                            \"type\": \"integer\",\r\n                            \"value\": 0\r\n                          }\r\n                        },\r\n                        {\r\n                          \"key\": \"id\",\r\n                          \"value\": {\r\n                            \"type\": \"integer\",\r\n                            \"value\": 1493154304896\r\n                          }\r\n                        },\r\n                        {\r\n                          \"key\": \"label\",\r\n                          \"value\": {\r\n                            \"type\": \"string\",\r\n                            \"value\": \"C:\"\r\n                          }\r\n                        },\r\n                        {\r\n                          \"key\": \"userCreated\",\r\n                          \"value\": {\r\n                            \"type\": \"boolean\",\r\n                            \"value\": true\r\n                          }\r\n                        },\r\n                        {\r\n                          \"key\": \"storage_reservation_policy\",\r\n                          \"value\": {\r\n                            \"type\": \"string\",\r\n                            \"value\": \"\"\r\n                          }\r\n                        },\r\n                        {\r\n                          \"key\": \"capacity\",\r\n                          \"value\": {\r\n                            \"type\": \"integer\",\r\n                            \"value\": 3\r\n                          }\r\n                        }\r\n                      ]\r\n                    }\r\n                  }\r\n                ]\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"allow_storage_policies\": {\r\n          \"facets\": {\r\n            \"fixedValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"boolean\",\r\n                \"value\": false\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"max_volumes\": {\r\n          \"facets\": {},\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"max_network_adapters\": {\r\n          \"facets\": {},\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"security_groups\": {\r\n          \"facets\": {\r\n            \"defaultValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"multiple\",\r\n                \"elementTypeId\": \"ENTITY_REFERENCE\",\r\n                \"items\": []\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        },\r\n        \"security_tags\": {\r\n          \"facets\": {\r\n            \"defaultValue\": {\r\n              \"type\": \"constant\",\r\n              \"value\": {\r\n                \"type\": \"multiple\",\r\n                \"elementTypeId\": \"ENTITY_REFERENCE\",\r\n                \"items\": []\r\n              }\r\n            }\r\n          },\r\n          \"permittedValues\": null,\r\n          \"data\": {}\r\n        }\r\n      },\r\n      \"componentProfiles\": [\r\n        {\r\n          \"id\": \"size\",\r\n          \"defaultValueName\": \"ValueSet.Small\",\r\n          \"permissibleValueNames\": [\r\n            \"ValueSet.Small\"\r\n          ]\r\n        }\r\n      ],\r\n      \"type\": \"Infrastructure.CatalogItem.Machine.Virtual.vSphere\",\r\n      \"propertyGroups\": null,\r\n      \"dependson\": []\r\n    }\r\n  },\r\n  \"properties\": {},\r\n  \"propertyGroups\": [],\r\n  \"externalId\": \"{{tenant}}!::!{{blueprintName}}\",\r\n  \"catalogItemTypeId\": null,\r\n  \"layout\": {\r\n    \"vSphere_Machine_1\": \"0,0\"\r\n  },\r\n  \"id\": \"{{blueprintName}}\"\r\n}"
+				},
+				"description": "Creates a new vSphere Blueprint and associates a profile with it. Also publishes the CBP."
+			},
+			"response": []
+		}
+	]
+}

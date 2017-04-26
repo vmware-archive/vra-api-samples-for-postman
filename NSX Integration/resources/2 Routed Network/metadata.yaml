@@ -1,0 +1,7 @@
+name: "cbp"
+productVersion: "7.3.0"
+data:
+  -
+    locator: "composite-blueprint/2Routed.yaml"
+    name: "2Routed"
+    description: ""

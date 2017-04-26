@@ -1,0 +1,7 @@
+name: "cbp"
+productVersion: "7.3.0"
+data:
+  -
+    locator: "composite-blueprint/3tier-3NAT.yaml"
+    name: "3tier-3NAT"
+    description: ""
