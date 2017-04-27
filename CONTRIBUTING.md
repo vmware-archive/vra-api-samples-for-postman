@@ -75,6 +75,7 @@ and commits.
  * Make sure the use case you implement has all required body set. A blind copy of swagger import into Postman defeats the purpose of this repo.
  * Modify existing README.md file to add your use case in the list or any instructions that are required. If new category needs to be added, add README.md for the category.
  * Make sure the commit message is explicit enough.
+ * If there is any specific release version samples, use [tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
 
 ## Reporting Bugs and Creating Issues
 

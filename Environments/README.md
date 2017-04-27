@@ -1,6 +1,6 @@
 # Postman Environment
 
-![](../images/postman_environment.png)
+![](../Images/postman_environment.png)
 
 Example:
 

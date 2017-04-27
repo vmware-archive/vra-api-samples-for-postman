@@ -2,7 +2,7 @@
 
 ## Overview
 
-The vRealize Automation REST API provides consumer, administrator, and provider-level access to the service catalog with the same services that support the vRealize Automation console user interface. You can perform vRealize Automation functions programmatically by using REST API service calls. These samples will provide a reference how you can leverage common use cases in vRealize Automation REST APIs.
+The vRealize Automation REST API provides consumers and administrators access to all services in its service catalog that support the vRealize Automation user interface. All services have a set of use cases that can be achieved programmatically by using these REST APIs. vRealize Automation 7.1 and later documents these APIs in swagger format. We have prepared a set of API samples to help accelerate a developer's ability to consume and integrate vRealize Automation programmatically.
 
 ## Try it Out
 
@@ -44,28 +44,32 @@ You can import the folder or the individual collection in the folder.
 
 ### General Notes
 
+#### Versions
+
+These API samples are created on top of vRealize Automation 7.2. Any version specific samples can be found under the respective release tag.
+
 #### Authentication
-Most of the vRA APIs are authorized by relevant roles. Before executing any API, make sure you login. Each of these use cases should have a login method. Send a login call after setting postman environment and it will retrieve the token and will set in environment variable in Postman. There is no need to copy the token over to next API method authorization header as all the APIs headers are set. Here are the steps:
+Most of the vRealize Automation API calls are authorized by relevant roles. Before executing any API, make sure you login with relevant user authorized to perform the operation. Each of these use cases should have a login method. Send a login call after setting postman environment and it will retrieve the token and will set in environment variable in Postman. There is no need to copy the token over to next API method authorization header as all the APIs headers are set. Here are the steps:
 
 **Set environment in Postman**
 
-![](./images/postman_environment.png)
+![](./Images/postman_environment.png)
 
 **Login**
 
 Use any of the Login calls available in samples collection.
 
-![](./images/login.png)
+![](./Images/login.png)
 
 When login is successful the environment variable {{token}} will be set.
 
-![](./images/login_token_as_environment_variable.png)
+![](./Images/login_token_as_environment_variable.png)
 
 **Subsquent API Calls**
 
 Once the token is acquired, you can make subsequent calls as below. The {{token}} will be automatically passed to the request as acquired by login call.
 
-![](./images/subsequent_postman_calls.png)
+![](./Images/subsequent_postman_calls.png)
 
 #### Variables
 
