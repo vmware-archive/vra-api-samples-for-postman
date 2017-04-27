@@ -53,23 +53,23 @@ Most of the vRealize Automation API calls are authorized by relevant roles. Befo
 
 **Set environment in Postman**
 
-![](./Images/postman_environment.png)
+![](./images/postman_environment.png)
 
 **Login**
 
 Use any of the Login calls available in samples collection.
 
-![](./Images/login.png)
+![](./images/login.png)
 
 When login is successful the environment variable {{token}} will be set.
 
-![](./Images/login_token_as_environment_variable.png)
+![](./images/login_token_as_environment_variable.png)
 
 **Subsquent API Calls**
 
 Once the token is acquired, you can make subsequent calls as below. The {{token}} will be automatically passed to the request as acquired by login call.
 
-![](./Images/subsequent_postman_calls.png)
+![](./images/subsequent_postman_calls.png)
 
 #### Variables
 
