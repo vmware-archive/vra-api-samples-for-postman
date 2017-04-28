@@ -1,4 +1,4 @@
-# vRealize Automation - Manage Blueprints
+# vRealize Automation - Composition Service
 
 The composition service allows vRA services to register application components, which the composition service manages so that they can be used in composite blueprints.
 

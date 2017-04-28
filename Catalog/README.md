@@ -18,6 +18,11 @@ The catalog service REST API is designed to be used by the consumers of the serv
  * Get available resource actions
  * Get resource action request template
  * Submit day 2 resource actions
+
+### Day 2 Machine Actions
+
  * Submit a reconfigure request
+ * Scale out machines
+ * Scale out machines with nested blueprint
 
 [A blog about request tracking](https://blogs.vmware.com/management/2015/10/self-service-apis-simplified-vrealize-automation-7-0.html)

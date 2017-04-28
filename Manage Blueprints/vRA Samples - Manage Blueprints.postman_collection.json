@@ -8,13 +8,34 @@
 		"d796d15b-c85a-9cbd-94dc-4df376e927aa",
 		"3dd4a4c5-6f00-5f8a-ad15-94652d5ae018",
 		"9b14901d-8c3d-34ba-cede-799199da57ed",
-		"a80e98e4-ff1c-9b2b-724c-1dc01e9999ee"
+		"a80e98e4-ff1c-9b2b-724c-1dc01e9999ee",
+		"1f2cc375-1088-d855-d207-aea704de2f27"
 	],
 	"folders": [],
 	"timestamp": 1491683480592,
 	"owner": "233286",
 	"public": false,
 	"requests": [
+		{
+			"id": "1f2cc375-1088-d855-d207-aea704de2f27",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+			"url": "https://{{va-fqdn}}/catalog-service/api/entitlements/{{entitlement-guid}}",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1493402269961,
+			"name": "Associate catalog item to entitlement",
+			"description": "",
+			"collectionId": "07f8702e-538e-00ba-bb4f-b04b7d2b4f30",
+			"responses": [],
+			"rawModeData": "{\n  \"description\": \"Created from Postman\",\n  \"entitledCatalogItems\": [\n    {\n      \"approvalPolicyId\": null,\n      \"hidden\": false,\n      \"active\": true,\n      \"catalogItemRequestable\": true,\n      \"catalogItemRef\": {\n        \"id\": \"{{catalog-item-guid}}\",\n        \"label\": \"{{catalog-item-label}}\"\n      }\n    }\n  ],\n  \"entitledResourceOperations\": [],\n  \"entitledServices\": [],\n  \"expiryDate\": null,\n  \"name\": \"Postman\",\n  \"organization\": {\n    \"tenantRef\": \"{{tenant}}\",\n    \"tenantLabel\": \"{{tenant}}Tenant\",\n    \"subtenantRef\": \"{{subtenant-guid}}\",\n    \"subtenantLabel\": \"{{subtenant-name}}\"\n  },\n  \"principals\": [\n    {\n      \"tenantName\": \"{{tenant}}\",\n      \"ref\": \"{{username@domain}}\",\n      \"type\": \"USER\",\n      \"value\": \"{{full-user-name}}\"\n    }\n  ],\n  \"priorityOrder\": 2,\n  \"status\": \"ACTIVE\",\n  \"statusName\": \"Active\",\n  \"localScopeForActions\": true,\n  \"version\": 0\n}"
+		},
 		{
 			"id": "3dd4a4c5-6f00-5f8a-ad15-94652d5ae018",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{token}}\nAccept: application/json\n",
