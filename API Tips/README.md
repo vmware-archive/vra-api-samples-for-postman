@@ -1,6 +1,6 @@
 # vRealize Automation API - Tips
 
-Most of the vRealize Automation APIs are required some sort of authentication token. They also support paging, sorting and filtering.
+Most of the vRealize Automation APIs require some sort of authentication token. They also support paging, sorting and filtering.
 
 ## Available Use Cases
 
