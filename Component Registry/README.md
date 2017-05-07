@@ -6,3 +6,5 @@ Component Registry manages all services (including out-of-the-box services and s
 
 * Query services information and endpoints
 * Get or Update logging level of services (only supported by a few services however)
+
+*[vRealize Automation API Tips](../API%20Tips)*

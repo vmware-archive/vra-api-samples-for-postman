@@ -41,3 +41,5 @@ Import "vRA Samples - NSX Provisioning Configuration.postman_collection.json"
 
 
 NOTE: All these methods have variable names defined in the format of {{variable-name}}. Make sure to replace them before calling the method.
+
+*[vRealize Automation API Tips](../API%20Tips)*

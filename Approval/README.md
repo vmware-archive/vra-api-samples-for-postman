@@ -198,3 +198,4 @@ POST https://{{va-fqdn}}/workitem-service/api/workitems/{{work-item-guid}}/actio
 }
 ```
 
+*[vRealize Automation API Tips](../API%20Tips)*

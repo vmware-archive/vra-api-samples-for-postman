@@ -8,3 +8,5 @@ The Branding service enables the user to customize the VRA UI header and footer.
 * Retrieve a tenant-level branding
 * Creates or updates a message board
 * Get message board
+
+*[vRealize Automation API Tips](../API%20Tips)*

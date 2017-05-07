@@ -15,3 +15,5 @@ A reservation is a pool of resources for provisioning, consisting of several dif
  * CRUD on storage reservation policy
 
 NOTE: A fabric administrator should be able to manage rservation and reservation policies.
+
+*[vRealize Automation API Tips](../API%20Tips)*

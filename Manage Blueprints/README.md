@@ -11,3 +11,5 @@ The composition service allows vRA services to register application components, 
  * Associate blueprint's catalog item to a catalog service
 
 NOTE: For import/export of a blueprint, look under [Content](../Content).
+
+*[vRealize Automation API Tips](../API%20Tips)*

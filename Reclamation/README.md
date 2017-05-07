@@ -8,3 +8,5 @@ You can use the reclamation service to query the VMs in an installation for non-
  * Get reclamation work items
  * Create reclamation work items
  * Cancel reclamation requests
+
+ *[vRealize Automation API Tips](../API%20Tips)*

@@ -16,3 +16,5 @@ A work item represents a piece of work that must be carried out by an end user. 
  * Approve reclamation request
 
 NOTE: For approval requests look under [Approvals](../Approval).
+
+*[vRealize Automation API Tips](../API%20Tips)*

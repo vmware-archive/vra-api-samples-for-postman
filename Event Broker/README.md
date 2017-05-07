@@ -8,3 +8,5 @@ The event broker provides features for managing subscriptions, event topics, eve
 * Register a replyable event topic
 * Get subscriptions or active subscriptions
 * Register new subscription, delete subscription
+
+*[vRealize Automation API Tips](../API%20Tips)*
