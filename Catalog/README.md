@@ -4,11 +4,21 @@ The catalog service REST API is designed to be used by the consumers of the serv
 
 ## Available Use Cases
 
+### Catalog Item Request Submission
+
+You can use the following workflow to submit a catalog request programmatically. A sample of this workflow is available in the postman collection for catalog service.
+
+![](../images/submit_catalog_item_request.png)
+
+[image credit](https://blogs.vmware.com/management/files/2015/10/API-request-template.png)
+
 ### Request Tracking
 
  * Track catalog request for a given user
  * Track individual component requests
  * Get deployment and resources for the deployment for a given request.
+
+[A blog about request tracking](https://blogs.vmware.com/management/2015/10/self-service-apis-simplified-vrealize-automation-7-0.html)
 
 ### Day 2
 
@@ -24,5 +34,3 @@ The catalog service REST API is designed to be used by the consumers of the serv
  * Submit a reconfigure request
  * Scale out machines
  * Scale out machines with nested blueprint
-
-[A blog about request tracking](https://blogs.vmware.com/management/2015/10/self-service-apis-simplified-vrealize-automation-7-0.html)
