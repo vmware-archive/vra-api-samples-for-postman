@@ -4,12 +4,22 @@ The composition service allows vRA services to register application components, 
 
 ## Available Use Cases
 
-### Create Composition Blueprint
+### Create Basic Blueprint
 
  * Get blueprints
  * Create a blueprints 
- * Associate blueprint's catalog item to a catalog service
 
 NOTE: For import/export of a blueprint, look under [Content](../Content).
+
+### Create Parameterized Blueprint
+
+ * Get component profiles
+ * Update component profiles
+ * Create blueprint with component profiles
+
+### Blueprint Catalog Association
+
+ * Associate blueprint with a catalog service
+ * Entitle a blueprint's catalog item
 
 *[vRealize Automation API Tips](../API%20Tips)*
