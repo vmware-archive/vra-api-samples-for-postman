@@ -5,7 +5,7 @@ The event broker provides features for managing subscriptions, event topics, eve
 ## Available Use Case
 
 * Get event topics
-* Register a replyable event topic
+* Registers or updates an Event Topic that can receive a reply.
 * Get subscriptions or active subscriptions
 * Register new subscription, delete subscription
 
