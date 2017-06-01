@@ -1,0 +1,329 @@
+{
+	"id": "74827af5-1868-7067-8d3c-d657656673b4",
+	"name": "vRA Samples - Health Service",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "baa4bad6-b3eb-b931-3a9f-37ef8c793067",
+			"name": "Configurations",
+			"description": "",
+			"order": [
+				"8801a3e1-cb1e-eca3-9f79-d0bf7294a82f",
+				"a940b799-30fb-ccf3-fb08-c690904b9248",
+				"57cd6e55-3d9b-d454-c4ff-ba7f028e3864",
+				"8be55cde-a7f2-30f7-1eba-3000be8d2f2a"
+			],
+			"owner": "233286",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4"
+		},
+		{
+			"id": "c76bf312-3f6c-911e-b655-8c7c4fbb4a96",
+			"name": "Login",
+			"description": "Login by full access administrator or normal consumer.\n\nRole for administrator: all\nRole for consumer: normal",
+			"order": [
+				"b0fb6ba0-6032-93e3-642f-4edf00edc166",
+				"20500213-8dc1-ff34-9118-0318b2a92091"
+			],
+			"owner": "233286"
+		},
+		{
+			"id": "d8b36736-bceb-340c-823c-0fa29aef7a1f",
+			"name": "Results",
+			"description": "",
+			"order": [
+				"0fe4abf1-3427-328f-a180-5537ec7a81b7",
+				"b9f3f7f6-4046-d15a-948e-30ae594785ba"
+			],
+			"owner": "233286"
+		}
+	],
+	"timestamp": 0,
+	"owner": "233286",
+	"public": false,
+	"requests": [
+		{
+			"id": "0fe4abf1-3427-328f-a180-5537ec7a81b7",
+			"headers": "x-xenon-auth-token: {{x-xenon-auth-token}}\n",
+			"headerData": [
+				{
+					"key": "x-xenon-auth-token",
+					"value": "{{x-xenon-auth-token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}:8090/health/result/overall-results?expand=true",
+			"queryParams": [
+				{
+					"key": "expand",
+					"value": "true",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496281988421,
+			"name": "Get overall results",
+			"description": "",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": []
+		},
+		{
+			"id": "20500213-8dc1-ff34-9118-0318b2a92091",
+			"headers": "Accept: text/html\nAuthorization: Bearer {{token}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "text/html",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/healthbroker-proxy-server/api/authn/normal",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"xenon token found\"] =  responseBody !== null;\npostman.setEnvironmentVariable(\"x-xenon-auth-token\", responseBody);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496279969194,
+			"name": "Login as consumer",
+			"description": "",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "20500213-8dc1-ff34-9118-0318b2a92091",
+			"folder": "c76bf312-3f6c-911e-b655-8c7c4fbb4a96"
+		},
+		{
+			"id": "57cd6e55-3d9b-d454-c4ff-ba7f028e3864",
+			"headers": "x-xenon-auth-token: {{x-xenon-auth-token}}\n",
+			"headerData": [
+				{
+					"key": "x-xenon-auth-token",
+					"value": "{{x-xenon-auth-token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/health/config/configurations/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get all configurations",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496281761626,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "baa4bad6-b3eb-b931-3a9f-37ef8c793067"
+		},
+		{
+			"id": "8801a3e1-cb1e-eca3-9f79-d0bf7294a82f",
+			"headers": "Accept: text/html\nAuthorization: Bearer {{token}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "text/html",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/healthbroker-proxy-server/api/authn/all",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"xenon token found\"] =  responseBody !== null;\npostman.setEnvironmentVariable(\"x-xenon-auth-token\", responseBody);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496279967088,
+			"name": "Login as full access admin",
+			"description": "",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "8801a3e1-cb1e-eca3-9f79-d0bf7294a82f",
+			"folder": "baa4bad6-b3eb-b931-3a9f-37ef8c793067"
+		},
+		{
+			"id": "8be55cde-a7f2-30f7-1eba-3000be8d2f2a",
+			"headers": "x-xenon-auth-token: {{x-xenon-auth-token}}\n",
+			"headerData": [
+				{
+					"key": "x-xenon-auth-token",
+					"value": "{{x-xenon-auth-token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/health/config/configurations/{{configuration-guid}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496281858177,
+			"name": "Delete configuration",
+			"description": "",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": []
+		},
+		{
+			"id": "a940b799-30fb-ccf3-fb08-c690904b9248",
+			"headers": "x-xenon-auth-token: {{x-xenon-auth-token}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "x-xenon-auth-token",
+					"value": "{{x-xenon-auth-token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}:8090/health/config/configurations",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496280563396,
+			"name": "Create a new configuration",
+			"description": "",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": [],
+			"rawModeData": "{\n    \"name\": \"Postman\",\n    \"overrides\": [\n        {\n            \"name\": \"url\",\n            \"type\": \"String\",\n            \"value\": \"https://{{va-fqdn}}\"\n        },\n        {\n            \"name\": \"vaDnsName\",\n            \"type\": \"String\",\n            \"value\": \"{{va-fqdn}}\"\n        },\n        {\n            \"name\": \"vaUserName\",\n            \"type\": \"String\",\n            \"value\": \"{{va-root-user}}\"\n        },\n        {\n            \"name\": \"vaPassword\",\n            \"type\": \"Password\",\n            \"value\": \"{{va-root-password}}\"\n        },\n        {\n            \"name\": \"tenant\",\n            \"type\": \"String\",\n            \"value\": \"{{tenant}}\"\n        },\n        {\n            \"name\": \"tenantUser\",\n            \"type\": \"String\",\n            \"value\": \"{{tenant-user-without-domain}}\"\n        },\n        {\n            \"name\": \"tenantPassword\",\n            \"type\": \"Password\",\n            \"value\": \"{{password}}\"\n        },\n        {\n            \"name\": \"ssoAdminUser\",\n            \"type\": \"String\",\n            \"value\": \"{{system-user-without-domain}}\"\n        },\n        {\n            \"name\": \"ssoAdminPassword\",\n            \"type\": \"Password\",\n            \"value\": \"{{system-password}}\"\n        }\n    ],\n    \"schedule\": {\n        \"cron\": \"0 0/5 * * * ?\",\n        \"description\": \"Only manual runs are possible\",\n        \"name\": \"None\"\n    },\n    \"tenantLink\": \"qe\",\n    \"testsToRunReferences\": [\n        \"/health/config/test-suites/Tenant+Tests+for+VRealize+AutomationvRealize+Automation7_3_0\"\n    ],\n    \"version\": {\n        \"build\": 0,\n        \"major\": 0,\n        \"minor\": 0,\n        \"release\": 0\n    }\n}"
+		},
+		{
+			"id": "b0fb6ba0-6032-93e3-642f-4edf00edc166",
+			"headers": "Accept: text/html\nAuthorization: Bearer {{token}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "text/html",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/healthbroker-proxy-server/api/authn/all",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"xenon token found\"] =  responseBody !== null;\npostman.setEnvironmentVariable(\"x-xenon-auth-token\", responseBody);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496279967088,
+			"name": "Login as full access admin",
+			"description": "",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "b0fb6ba0-6032-93e3-642f-4edf00edc166",
+			"folder": "c76bf312-3f6c-911e-b655-8c7c4fbb4a96"
+		},
+		{
+			"id": "b9f3f7f6-4046-d15a-948e-30ae594785ba",
+			"headers": "x-xenon-auth-token: {{x-xenon-auth-token}}\n",
+			"headerData": [
+				{
+					"key": "x-xenon-auth-token",
+					"value": "{{x-xenon-auth-token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}:8090/health/result/individual-result?expand=true",
+			"queryParams": [
+				{
+					"key": "expand",
+					"value": "true",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get individual results",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496282013452,
+			"version": 2,
+			"responses": [],
+			"tests": "var data = JSON.parse(responseBody);\nvar overall = {};\ntests[\"Documents count greater than 0 \"] = data.documentCount > 0;\n\nfor(var k in data.documents) {\n   var v = data.documents[k]; \n   var oa = v.overallResultsLink;\n   if(oa in overall) {\n       overall[oa]++;\n   } else {\n       overall[oa] = 0;\n   }\n   \n   //tests[\"===== Configuration: \" + v.documentSelfLink] = true;\n   //tests[\"latestExecutionQuerySpec is set: \" + k] = v.latestExecutionQuerySpec.query.occurance === //\"MUST_OCCUR\";  \n   //tests[\"latestOrderedExecutionsQuerySpec is set: \"+ k] = v.latestOrderedExecutionsQuerySpec.query//.occurance === \"MUST_OCCUR\";  \n}\n\nfor(var oa in overall) {\n    tests[\"Overall \" + oa + \" = \" + overall[oa] ] = overall[oa] === 70; \n}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "d8b36736-bceb-340c-823c-0fa29aef7a1f"
+		}
+	]
+}
