@@ -2,7 +2,7 @@
 
 You can use the endpoint configuration service REST API to create, read, update and delete endpoint types, endpoint categories, and endpoints.
 
-## Available Use Cases
+## Available Use Cases (v7.3 only)
 
  * Register new endpoint category
  * Register new endpoint type

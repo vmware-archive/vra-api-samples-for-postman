@@ -46,7 +46,7 @@ You can import the folder or the individual collection in the folder.
 
 #### Versions
 
-These API samples are created on top of vRealize Automation 7.2. Any version specific samples can be found under the respective release tag.
+These API samples are created on top of vRealize Automation 7.3. Any version specific samples can be found under the respective release tag.
 
 #### Authentication
 Most of the vRealize Automation API calls are authorized by relevant roles. Before executing any API, make sure you login with relevant user authorized to perform the operation. Each of these use cases should have a login method. Send a login call after setting postman environment and it will retrieve the token and will set in environment variable in Postman. There is no need to copy the token over to next API method authorization header as all the APIs headers are set. Here are the steps:

@@ -1,6 +1,6 @@
 # vRealize Automation - Health Service
 
-## Available Use Cases
+## Available Use Cases (v7.3 only)
 
 **Login**
 
