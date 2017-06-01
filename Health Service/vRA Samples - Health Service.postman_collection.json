@@ -9,6 +9,7 @@
 			"name": "Configurations",
 			"description": "",
 			"order": [
+				"400b1151-93e3-d888-fcaf-768f27014269",
 				"8801a3e1-cb1e-eca3-9f79-d0bf7294a82f",
 				"a940b799-30fb-ccf3-fb08-c690904b9248",
 				"57cd6e55-3d9b-d454-c4ff-ba7f028e3864",
@@ -22,6 +23,7 @@
 			"name": "Login",
 			"description": "Login by full access administrator or normal consumer.\n\nRole for administrator: all\nRole for consumer: normal",
 			"order": [
+				"5094dace-a983-b40f-6455-b35280ea0b0d",
 				"b0fb6ba0-6032-93e3-642f-4edf00edc166",
 				"20500213-8dc1-ff34-9118-0318b2a92091"
 			],
@@ -33,7 +35,9 @@
 			"description": "",
 			"order": [
 				"0fe4abf1-3427-328f-a180-5537ec7a81b7",
-				"b9f3f7f6-4046-d15a-948e-30ae594785ba"
+				"b9f3f7f6-4046-d15a-948e-30ae594785ba",
+				"b3f7666c-c153-754a-dd45-82b362f33841",
+				"470519ca-e8d8-990a-a426-d43ec2150863"
 			],
 			"owner": "233286"
 		}
@@ -115,6 +119,114 @@
 			"isFromCollection": true,
 			"collectionRequestId": "20500213-8dc1-ff34-9118-0318b2a92091",
 			"folder": "c76bf312-3f6c-911e-b655-8c7c4fbb4a96"
+		},
+		{
+			"id": "400b1151-93e3-d888-fcaf-768f27014269",
+			"headers": "Accept: application/json\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/identity/api/tokens",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response contains auth token\"] = responseBody.has(\"id\");\npostman.clearEnvironmentVariable(\"token\");\nvar data = JSON.parse(responseBody);\ntests[\"Auth token is not null\"] = data.id !== \"\";\npostman.setEnvironmentVariable(\"token\", data.id);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496321347266,
+			"name": "Login to VA",
+			"description": " Returns a token associated with the provided credentials.",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": [],
+			"rawModeData": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\",\"tenant\":\"{{tenant}}\"}"
+		},
+		{
+			"id": "470519ca-e8d8-990a-a426-d43ec2150863",
+			"headers": "x-xenon-auth-token: {{x-xenon-auth-token}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "x-xenon-auth-token",
+					"value": "{{x-xenon-auth-token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}:8090/core/health-query-tasks",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": "",
+			"method": "POST",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Get the individual result",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496321477726,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "d8b36736-bceb-340c-823c-0fa29aef7a1f",
+			"rawModeData": "{\n    \"taskInfo\": {\n        \"isDirect\": true\n    },\n    \"querySpec\": {\n        \"query\": {\n            \"occurance\": \"MUST_OCCUR\",\n            \"booleanClauses\": [{\n                \"occurance\": \"MUST_OCCUR\",\n                \"term\": {\n                    \"propertyName\": \"documentKind\",\n                    \"matchValue\": \"com:vmware:healthbroker:states:IndividualTestResultServiceState\",\n                    \"matchType\": \"TERM\"\n                }\n            },\n            {\n                \"occurance\": \"MUST_OCCUR\",\n                \"term\": {\n                    \"propertyName\": \"overallResultsLink\",\n                    \"matchValue\": \"/health/result/overall-results/Report_vRA_20161103-22.59.03.0373\",\n                    \"matchType\": \"TERM\"\n                }\n            }]\n        },\n        \"sortTerm\": {\n            \"propertyName\": \"state\",\n            \"propertyType\": \"STRING\"\n        },\n        \"sortOrder\": \"DESC\",\n        \"options\": [\"EXPAND_CONTENT\",\n        \"SORT\"]\n    }\n}"
+		},
+		{
+			"id": "5094dace-a983-b40f-6455-b35280ea0b0d",
+			"headers": "Accept: application/json\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/identity/api/tokens",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response contains auth token\"] = responseBody.has(\"id\");\npostman.clearEnvironmentVariable(\"token\");\nvar data = JSON.parse(responseBody);\ntests[\"Auth token is not null\"] = data.id !== \"\";\npostman.setEnvironmentVariable(\"token\", data.id);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496321338752,
+			"name": "Login to VA",
+			"description": " Returns a token associated with the provided credentials.",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"responses": [],
+			"rawModeData": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\",\"tenant\":\"{{tenant}}\"}"
 		},
 		{
 			"id": "57cd6e55-3d9b-d454-c4ff-ba7f028e3864",
@@ -285,6 +397,44 @@
 			"isFromCollection": true,
 			"collectionRequestId": "b0fb6ba0-6032-93e3-642f-4edf00edc166",
 			"folder": "c76bf312-3f6c-911e-b655-8c7c4fbb4a96"
+		},
+		{
+			"id": "b3f7666c-c153-754a-dd45-82b362f33841",
+			"headers": "x-xenon-auth-token: {{x-xenon-auth-token}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "x-xenon-auth-token",
+					"value": "{{x-xenon-auth-token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}:8090/core/health-query-tasks",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": "",
+			"method": "POST",
+			"collectionId": "74827af5-1868-7067-8d3c-d657656673b4",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Get latest test execution results",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496321416016,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "d8b36736-bceb-340c-823c-0fa29aef7a1f",
+			"rawModeData": "{\n    \"taskInfo\": {\n        \"isDirect\": true\n    },\n    \"querySpec\": {\n        \"query\": {\n            \"occurance\": \"MUST_OCCUR\",\n            \"booleanClauses\": [{\n                \"occurance\": \"MUST_OCCUR\",\n                \"term\": {\n                    \"propertyName\": \"documentKind\",\n                    \"matchValue\": \"com:vmware:healthbroker:states:ExecutionServiceState\",\n                    \"matchType\": \"TERM\"\n                }\n            },\n            {\n                \"occurance\": \"MUST_OCCUR\",\n                \"term\": {\n                    \"propertyName\": \"configurationLink\",\n                    \"matchValue\": \"/health/config/configurations/8277769f1478213933292000\",\n                    \"matchType\": \"TERM\"\n                }\n            }]\n        },\n        \"sortTerm\": {\n            \"propertyName\": \"startedTimestamp\",\n            \"propertyType\": \"LONG\"\n        },\n        \"sortOrder\": \"DESC\",\n        \"resultLimit\": 1,\n        \"options\": [\"TOP_RESULTS\",\n        \"EXPAND_CONTENT\",\n        \"SORT\"]\n    }\n}"
 		},
 		{
 			"id": "b9f3f7f6-4046-d15a-948e-30ae594785ba",
