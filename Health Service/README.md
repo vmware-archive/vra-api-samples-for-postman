@@ -18,26 +18,86 @@
 * Get latest test execution results
 * Get an individual result
 
-This is what a sample result look like:
+The results from above samples will give numerous query spec for different scenarios.
+
+For help in generating query spec for health service, look [here](https://github.com/vmware/xenon/wiki/Introduction-to-Service-Queries)
+
+A sample query for latest test execution:
 
 ```
+POST /core/health-query-tasks
 {
-  "testMethod": { 
-    "name": "vRealize Automation Node Common Name Certificate Check", 
-    "description": "This test case verifies that the vRA node certificate Common names match that of it's server. This test is most useful for distributed/HA environments.",
-    "descriptionType": "text",
-    "severity": "CRITICAL",
-    "methodName": "areVraNodeCertsCommonNameValid", 
-    "accessLevel": "INFRASTRUCTURE",
-    "enabled": false,
-    "configurationReferences": []
-  },
-  "startTime": "1478213951731",  
-  "endTime": "1478213960684", 
-  "state": "FAILED", 
-  "message": "Not all checks were successful. See the following errors for more details: \njava.io.IOException: Unable to get the certificate of your server [{{va-fqdn}}:443]. Please confirm configuration information. The returned exception is: [java.net.UnknownHostException: {{va-fqdn}}] \n", 
-  "remediationType": "html",
-  "remediation": "http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&cmd=displayKC&externalId=2106583", 
-  "overallResultsLink": "/health/result/overall-results/Report_vRA_20161103-22.59.03.0373", 
+    "taskInfo": {
+        "isDirect": true
+    },
+    "querySpec": {
+        "query": {
+            "occurance": "MUST_OCCUR",
+            "booleanClauses": [{
+                "occurance": "MUST_OCCUR",
+                "term": {
+                    "propertyName": "documentKind",
+                    "matchValue": "com:vmware:healthbroker:states:ExecutionServiceState",
+                    "matchType": "TERM"
+                }
+            },
+            {
+                "occurance": "MUST_OCCUR",
+                "term": {
+                    "propertyName": "configurationLink",
+                    "matchValue": "/health/config/configurations/{{configuration-id}}",
+                    "matchType": "TERM"
+                }
+            }]
+        },
+        "sortTerm": {
+            "propertyName": "startedTimestamp",
+            "propertyType": "LONG"
+        },
+        "sortOrder": "DESC",
+        "resultLimit": 1,
+        "options": ["TOP_RESULTS",
+        "EXPAND_CONTENT",
+        "SORT"]
+    }
+}
+```
+
+A sample query for individual result:
+
+```
+POST /core/health-query-tasks
+{
+    "taskInfo": {
+        "isDirect": true
+    },
+    "querySpec": {
+        "query": {
+            "occurance": "MUST_OCCUR",
+            "booleanClauses": [{
+                "occurance": "MUST_OCCUR",
+                "term": {
+                    "propertyName": "documentKind",
+                    "matchValue": "com:vmware:healthbroker:states:IndividualTestResultServiceState",
+                    "matchType": "TERM"
+                }
+            },
+            {
+                "occurance": "MUST_OCCUR",
+                "term": {
+                    "propertyName": "overallResultsLink",
+                    "matchValue": "/health/result/overall-results/{{report-id}}",
+                    "matchType": "TERM"
+                }
+            }]
+        },
+        "sortTerm": {
+            "propertyName": "state",
+            "propertyType": "STRING"
+        },
+        "sortOrder": "DESC",
+        "options": ["EXPAND_CONTENT",
+        "SORT"]
+    }
 }
 ```
