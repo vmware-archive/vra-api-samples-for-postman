@@ -34,6 +34,7 @@ You can use the following workflow to submit a catalog request programmatically.
  * Submit a reconfigure request
  * Scale out machines
  * Scale out machines with nested blueprint
+ * Change Owner
 
 
 *[vRealize Automation API Tips](../API%20Tips)*

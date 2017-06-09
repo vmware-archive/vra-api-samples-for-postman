@@ -32,7 +32,8 @@
 				"ca5067cb-c440-cecc-2f7f-991f9ac530ab",
 				"f3892ff3-9e04-d411-1dc4-e7e0849697d2",
 				"65351582-ad02-8302-fdff-8145b61a6ee6",
-				"43233454-6864-d24f-4349-e595300cb5e0"
+				"43233454-6864-d24f-4349-e595300cb5e0",
+				"75227cae-c9ae-be53-ed9e-d838f9a2d8af"
 			],
 			"owner": "233286"
 		},
@@ -254,6 +255,47 @@
 			"collectionId": "c078e244-155b-09ab-a10d-06707f3cfe5f",
 			"isFromCollection": true,
 			"folder": "08d162ee-de6d-38fc-856d-03bcf1889a91"
+		},
+		{
+			"id": "75227cae-c9ae-be53-ed9e-d838f9a2d8af",
+			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/catalog-service/api/consumer/resources/{{resource-guid}}/actions/{{resource-action-guid}}/requests",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497037513794,
+			"name": "Change owner",
+			"description": "",
+			"collectionId": "c078e244-155b-09ab-a10d-06707f3cfe5f",
+			"responses": [],
+			"rawModeData": "{\n  \"type\": \"com.vmware.vcac.catalog.domain.request.CatalogResourceRequest\",\n  \"resourceId\": \"{{resource-guid}}\",\n  \"actionId\": \"{{resource-action-guid}}\",\n  \"description\": null,\n  \"data\": {\n    \"provider-NewOwner\": {\"type\":\"entityRef\", \"classId\":\"principal\", \"id\":\"{{new-owner@domain}}\", \"label\":\"{{new-owner-name}}\"}\n  }\n}"
 		},
 		{
 			"id": "85d7071b-c42d-6ff4-cad4-1c53f84d5087",
