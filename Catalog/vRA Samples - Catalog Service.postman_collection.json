@@ -80,21 +80,43 @@
 		{
 			"id": "1014fec7-df88-2d1c-8bcd-e67634ebff9f",
 			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\n",
-			"url": "https://{{va-fqdn}}/catalog-service/api/consumer/requests?filter=requestedFor eq '{{username@domain}}'",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/catalog-service/api/consumer/requests?$filter=requestedFor eq '{{username@domain}}'",
+			"queryParams": [
+				{
+					"key": "$filter",
+					"value": "requestedFor eq '{{username@domain}}'",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
 			"preRequestScript": null,
 			"pathVariables": {},
+			"pathVariableData": [],
 			"method": "GET",
 			"data": null,
 			"dataMode": "params",
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1491336632281,
+			"time": 1497324283064,
 			"name": "Get catalog requests for the user",
 			"description": "This will retrieve the catalog requests for the user.",
-			"collectionId": "c078e244-155b-09ab-a10d-06707f3cfe5f",
-			"isFromCollection": true,
-			"folder": "d110355c-43c0-877f-240d-4a727f9bb018"
+			"collectionId": "c078e244-155b-09ab-a10d-06707f3cfe5f"
 		},
 		{
 			"id": "3984a094-1832-07ab-56ac-71ca046fc57d",
