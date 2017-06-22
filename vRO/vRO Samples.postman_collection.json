@@ -1,0 +1,115 @@
+{
+	"id": "a5af64b9-4d88-9b54-5c13-8958d863b90b",
+	"name": "vRO Samples",
+	"description": "",
+	"order": [
+		"a854c6a3-9401-7573-9288-e075a01d2201",
+		"854c31f1-dc01-9784-c32c-940f96ede8f0"
+	],
+	"folders": [],
+	"timestamp": 1498161882676,
+	"owner": "233286",
+	"public": false,
+	"requests": [
+		{
+			"id": "854c31f1-dc01-9784-c32c-940f96ede8f0",
+			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{token}}",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/vco/api/workflows",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "a5af64b9-4d88-9b54-5c13-8958d863b90b",
+			"data": null,
+			"dataMode": "params",
+			"name": "Get vRO workflows",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1498162122926,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "a854c6a3-9401-7573-9288-e075a01d2201",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/SAAS/t/{{system-tenant}}/auth/oauthtoken?grant_type=password",
+			"queryParams": [
+				{
+					"key": "grant_type",
+					"value": "password",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "username",
+					"value": "{{system-user-without-domain}}",
+					"description": "e.g. administrator",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "{{system-user-password}}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "see description",
+					"description": "grep -i cafe_cli= /etc/vcac/solution-users.properties | sed -e 's/cafe_cli=//'",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "domain",
+					"value": "{{system-tenant}}",
+					"description": "system user domain",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response contains auth token\"] = responseBody.has(\"access_token\");\npostman.clearEnvironmentVariable(\"token\");\nvar data = JSON.parse(responseBody);\ntests[\"Auth token is not null\"] = data.access_token !== \"\";\npostman.setEnvironmentVariable(\"token\", data.access_token);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1498162619131,
+			"name": "Get vRO auth token",
+			"description": "",
+			"collectionId": "a5af64b9-4d88-9b54-5c13-8958d863b90b",
+			"responses": []
+		}
+	]
+}
