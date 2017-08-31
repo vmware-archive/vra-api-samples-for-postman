@@ -8,6 +8,11 @@ A reservation is a pool of resources for provisioning, consisting of several dif
 
  * Get reservation data such as compute resource, storagePath, networks etc.
  * Create reservation (samples include vSphere and vSphere with NSX component)
+ * Edit Reservation: Use the following flow:
+   * Get all reservations
+   * Get individual reservation by ID, copy the response and paste it in a editor.
+   * Remove `createdDate`, `lastUpdated`, `version`, Update other values as required.
+   * Call Update reservation sample with updated payload as modified in earlier steps.
 
 ### Reservation Policy
 
