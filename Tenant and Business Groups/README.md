@@ -24,4 +24,9 @@ Identity service manages tenants, business groups (formerly named subtenants), g
  * Assign roles to user
  * Return roles for a user
 
+### Roles
+
+ * Get roles
+ * Add roles to a principal
+
 *[vRealize Automation API Tips](../API%20Tips)*
