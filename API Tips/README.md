@@ -87,3 +87,6 @@ Note: Notice how even though the serviceRef object contains a label element, we 
 https://{{va-fqdn}}/catalog-service/api/consumer/catalogItems?$filter=service/name+eq+'{{service-name}}'
 ```
 
+**Backward Compatibility**
+
+Some APIs do support backward compatibility. To get backward compatible results in newer version, include header with key being `version` and value being the old API version such as `6.2`, `6.1` etc.
