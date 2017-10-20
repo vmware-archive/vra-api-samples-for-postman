@@ -21,14 +21,11 @@
 			"folders_order": []
 		},
 		{
-			"id": "42c74360-3378-06ab-fc44-bb45d08f914a",
-			"name": "Groups",
+			"name": "Business Groups",
 			"description": "",
+			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
 			"order": [
 				"ca439533-d5b1-1ac1-61af-247a8d9a8b4d",
-				"24b654e1-ef5b-f418-2a26-c878946fb358",
-				"e6c60b7a-0c85-284f-f8a9-ecc776060cbc",
-				"e8bb0eeb-0eba-3bbe-0c50-e989d1e71548",
 				"3eb9341c-3ed0-ddd4-f0cf-3c1854828f33",
 				"0565d0ba-962c-9c40-c5b9-fd79c01063b9",
 				"39c81a1d-5793-fe7b-a1a3-d09d14e1b4b0",
@@ -36,8 +33,54 @@
 				"d778ef50-2e75-e347-6f6a-3b5839a53a3a"
 			],
 			"owner": "233286",
+			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folders_order": [],
+			"id": "49c1032a-7efa-629f-1489-abaddfa7c7fc"
+		},
+		{
+			"name": "Custom Groups",
+			"description": "",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
-			"folders_order": []
+			"order": [
+				"f33f6522-6dfa-906e-f871-ac928d0e9c72",
+				"24b654e1-ef5b-f418-2a26-c878946fb358",
+				"e6c60b7a-0c85-284f-f8a9-ecc776060cbc",
+				"e8bb0eeb-0eba-3bbe-0c50-e989d1e71548"
+			],
+			"owner": "233286",
+			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folders_order": [],
+			"id": "16b97fac-3a41-93ed-6579-9dba1e5d7ca0"
+		},
+		{
+			"id": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"name": "Groups",
+			"description": "",
+			"order": [],
+			"folders_order": [
+				"c408e6b7-dbb5-50d4-d8ce-7e40c2361a21",
+				"49c1032a-7efa-629f-1489-abaddfa7c7fc",
+				"16b97fac-3a41-93ed-6579-9dba1e5d7ca0"
+			],
+			"owner": "233286",
+			"lastUpdatedBy": "233286",
+			"lastRevision": 2427869212,
+			"folder": null
+		},
+		{
+			"name": "Return AD users part of vRA business group",
+			"description": "",
+			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"order": [
+				"618e31bb-50ad-b6f7-c9e5-a0576effdc44",
+				"f7f4de39-42fb-2f5e-1e18-d8b496d66cf7",
+				"aa4877b9-0b4a-8edf-821e-b9d2a00c4944",
+				"46bc3a6c-5143-d740-6095-ce779300e2bb"
+			],
+			"owner": "233286",
+			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folders_order": [],
+			"id": "c408e6b7-dbb5-50d4-d8ce-7e40c2361a21"
 		},
 		{
 			"name": "Roles",
@@ -120,8 +163,9 @@
 			"description": "",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
 			"isFromCollection": true,
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
-			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
+			"folder": "49c1032a-7efa-629f-1489-abaddfa7c7fc",
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "0565d0ba-962c-9c40-c5b9-fd79c01063b9"
 		},
 		{
 			"id": "0f39df1a-8a82-097c-4640-e0a477d307dd",
@@ -162,7 +206,7 @@
 			"description": "Create a custom group at the top of the tree.",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
 			"isFromCollection": true,
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folder": "16b97fac-3a41-93ed-6579-9dba1e5d7ca0",
 			"rawModeData": "{\n  \"@type\": \"Group\",\n  \"groupType\": \"CUSTOM\",\n  \"name\": \"custom10\",\n  \"fqdn\": \"custom1@{{tenant}}\",\n  \"domain\": \"{{tenant}}\",\n  \"description\": \"created by demo content\",\n  \"principalId\": {\n    \"domain\": \"{{tenant}}\",\n    \"name\": \"custom10\"\n  }\n}",
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
 		},
@@ -316,7 +360,7 @@
 			"name": "Return business group roles (and scopeRef)",
 			"description": "This will give the scopeRef for the role",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folder": "49c1032a-7efa-629f-1489-abaddfa7c7fc",
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
 		},
 		{
@@ -360,9 +404,30 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folder": "49c1032a-7efa-629f-1489-abaddfa7c7fc",
 			"rawModeData": "{\n  \"name\": \"{{business-group-name}}\",\n  \"description\": \"created by postman\",\n  \"subtenantRoles\": null,\n  \"extensionData\": {\n    \"entries\": [\n      {\n        \"key\": \"iaas-manager-emails\",\n        \"value\": {\n          \"type\": \"string\",\n          \"value\": \"{{business-group-manager-email}}\"\n        }\n      }\n    ]\n  },\n  \"tenant\": \"{{tenant}}\"\n}",
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
+		},
+		{
+			"id": "46bc3a6c-5143-d740-6095-ce779300e2bb",
+			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\n",
+			"url": "https://{{va-fqdn}}/identity/api/tenants/{{tenant}}/subtenants/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1491667251403,
+			"name": "List principals of a given subtenant",
+			"description": "",
+			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"isFromCollection": true,
+			"folder": "c408e6b7-dbb5-50d4-d8ce-7e40c2361a21",
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "f7f4de39-42fb-2f5e-1e18-d8b496d66cf7"
 		},
 		{
 			"id": "49598c5f-b723-12aa-bf42-1c2892f16c1f",
@@ -409,6 +474,29 @@
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
 		},
 		{
+			"id": "618e31bb-50ad-b6f7-c9e5-a0576effdc44",
+			"headers": "Accept: application/json\nContent-Type: application/json\n",
+			"url": "https://{{va-fqdn}}/identity/api/tokens",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response contains auth token\"] = responseBody.has(\"id\");\npostman.clearEnvironmentVariable(\"token\");\nvar data = JSON.parse(responseBody);\ntests[\"Auth token is not null\"] = data.id !== \"\";\npostman.setEnvironmentVariable(\"token\", data.id);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1490797253806,
+			"name": "Login",
+			"description": " Returns a token associated with the provided credentials.\n \n This login should be used for any tenant user.\n \n NOTE: We save the token in the environment variables in Postman so you don't need to copy-paste it for every call.",
+			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"responses": [],
+			"isFromCollection": true,
+			"folder": "c408e6b7-dbb5-50d4-d8ce-7e40c2361a21",
+			"rawModeData": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\",\"tenant\":\"{{tenant}}\"}",
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "618e31bb-50ad-b6f7-c9e5-a0576effdc44"
+		},
+		{
 			"id": "68e2aa8d-0847-a9e4-5f41-df10054171ed",
 			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\nContent-Type: application/json\n",
 			"url": "https://{{va-fqdn}}/identity/api/tenants/{{tenant}}",
@@ -446,9 +534,10 @@
 			"description": "Adds the provided principals to the identified business group role.",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
 			"isFromCollection": true,
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folder": "49c1032a-7efa-629f-1489-abaddfa7c7fc",
 			"rawModeData": "[\n  {\n    \"domain\": \"{{domain}}\",\n    \"name\": \"{{full-user-name}}\"\n  }\n]",
-			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "692a27d0-9d62-f591-6ac7-8902f2ba3594"
 		},
 		{
 			"id": "7f8c0eba-629d-d9e5-cb0f-68ec77a9d459",
@@ -517,6 +606,48 @@
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
 		},
 		{
+			"id": "aa4877b9-0b4a-8edf-821e-b9d2a00c4944",
+			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://{{va-fqdn}}/identity/api/tenants/{{tenant}}/principals/?parentGroup={{AD_group@domain}}",
+			"folder": "c408e6b7-dbb5-50d4-d8ce-7e40c2361a21",
+			"queryParams": [
+				{
+					"key": "parentGroup",
+					"value": "{{AD_group@domain}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508524979978,
+			"name": "List vRA principals of an AD group",
+			"description": "",
+			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f"
+		},
+		{
 			"id": "b5b1625b-fc3a-bba4-0160-951f8eb1c2ed",
 			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\nContent-Type: application/json\n",
 			"url": "https://{{va-fqdn}}/identity/api/tenants/{{tenant}}/directories",
@@ -556,9 +687,10 @@
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
 			"responses": [],
 			"isFromCollection": true,
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folder": "49c1032a-7efa-629f-1489-abaddfa7c7fc",
 			"rawModeData": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\",\"tenant\":\"{{tenant}}\"}",
-			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "ca439533-d5b1-1ac1-61af-247a8d9a8b4d"
 		},
 		{
 			"id": "d778ef50-2e75-e347-6f6a-3b5839a53a3a",
@@ -576,7 +708,7 @@
 			"name": "Remove a principal from a business group role",
 			"description": "",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folder": "49c1032a-7efa-629f-1489-abaddfa7c7fc",
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
 		},
 		{
@@ -596,7 +728,7 @@
 			"description": "Retrieves all custom groups and SSO that has assigned roles and groups that correspond to the search criteria.\nParameter '$filter' is not taken into account, please use 'criteria' instead.",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
 			"isFromCollection": true,
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
+			"folder": "16b97fac-3a41-93ed-6579-9dba1e5d7ca0",
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
 		},
 		{
@@ -616,8 +748,9 @@
 			"description": "",
 			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
 			"isFromCollection": true,
-			"folder": "42c74360-3378-06ab-fc44-bb45d08f914a",
-			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
+			"folder": "16b97fac-3a41-93ed-6579-9dba1e5d7ca0",
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "e8bb0eeb-0eba-3bbe-0c50-e989d1e71548"
 		},
 		{
 			"id": "ef72bc99-2fef-12a0-7aa1-9d83b60c955c",
@@ -640,6 +773,51 @@
 			"isFromCollection": true,
 			"folder": "368d9412-0c8d-ea6f-ec15-e893ba8ff93d",
 			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f"
+		},
+		{
+			"id": "f33f6522-6dfa-906e-f871-ac928d0e9c72",
+			"headers": "Accept: application/json\nContent-Type: application/json\n",
+			"url": "https://{{va-fqdn}}/identity/api/tokens",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response contains auth token\"] = responseBody.has(\"id\");\npostman.clearEnvironmentVariable(\"token\");\nvar data = JSON.parse(responseBody);\ntests[\"Auth token is not null\"] = data.id !== \"\";\npostman.setEnvironmentVariable(\"token\", data.id);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1490797253806,
+			"name": "Login",
+			"description": " Returns a token associated with the provided credentials.\n \n This login should be used for any tenant user.\n \n NOTE: We save the token in the environment variables in Postman so you don't need to copy-paste it for every call.",
+			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"responses": [],
+			"isFromCollection": true,
+			"folder": "16b97fac-3a41-93ed-6579-9dba1e5d7ca0",
+			"rawModeData": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\",\"tenant\":\"{{tenant}}\"}",
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "f33f6522-6dfa-906e-f871-ac928d0e9c72",
+			"folderId": "16b97fac-3a41-93ed-6579-9dba1e5d7ca0"
+		},
+		{
+			"id": "f7f4de39-42fb-2f5e-1e18-d8b496d66cf7",
+			"headers": "Accept: application/json\nAuthorization: Bearer {{token}}\n",
+			"url": "https://{{va-fqdn}}/identity/api/tenants/{{tenant}}/subtenants/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1491667251403,
+			"name": "List all business groups",
+			"description": "",
+			"collectionId": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"isFromCollection": true,
+			"folder": "c408e6b7-dbb5-50d4-d8ce-7e40c2361a21",
+			"collection_id": "378c5929-682c-3651-5ef4-bd8fc167061f",
+			"collectionRequestId": "f7f4de39-42fb-2f5e-1e18-d8b496d66cf7"
 		},
 		{
 			"id": "f80581b5-9700-fd93-51c9-3bf03ba4e67a",

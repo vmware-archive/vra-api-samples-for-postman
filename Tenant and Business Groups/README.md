@@ -15,6 +15,7 @@ Identity service manages tenants, business groups (formerly named subtenants), g
  * Create business groups
  * Add business group roles to a user
  * Get all business groups for a user
+ * Get all Active Directory users added in all vRA business groups
 
 ### Tenant
 
