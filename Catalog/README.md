@@ -17,6 +17,7 @@ You can use the following workflow to submit a catalog request programmatically.
  * Track catalog request for a given user
  * Track individual component requests
  * Get deployment and resources for the deployment for a given request.
+ * Get all failed requests for a given tenant
 
 [A blog about request tracking](https://blogs.vmware.com/management/2015/10/self-service-apis-simplified-vrealize-automation-7-0.html)
 
