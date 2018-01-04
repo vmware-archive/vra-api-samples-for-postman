@@ -4,9 +4,17 @@ You can use the endpoint configuration service REST API to create, read, update 
 
 ## Available Use Cases (v7.3 only)
 
+### Register new endpoint type
+
  * Register new endpoint category
  * Register new endpoint type
- * Creates new endpoints
- * Creates new endpoints with an association
+
+### Create new endpoint
+ * Create new endpoint (sample for vSphere endpoint)
+ * Create new endpoint with an association (sample for NSX with vSphere)
+
+### Edit endpoint
+ * Get endpoint by id (make sure to copy the data of this API call)
+ * Edit endpoint (sample for a basic vSphere endpoint, replace the data retrieved in first call and then edit desirable values)
 
 NOTE: Only available for vRealize Automation 7.3 onwards
