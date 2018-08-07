@@ -17,4 +17,8 @@ You can use the endpoint configuration service REST API to create, read, update 
  * Get endpoint by id (make sure to copy the data of this API call)
  * Edit endpoint (sample for a basic vSphere endpoint, replace the data retrieved in first call and then edit desirable values)
 
+### Automate vCenter endpoint (with certficate)
+ * Validates vCenter endpoint and retrieves the endpoint thumbprint
+ * Creates vCenter endpoint by passing in the retrieved thumbprint
+
 NOTE: Only available for vRealize Automation 7.3 onwards
