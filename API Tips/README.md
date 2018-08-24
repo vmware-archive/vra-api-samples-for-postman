@@ -29,7 +29,7 @@ Each GET call (that returns list) will return metadata in the following format:
 
 ```
 "metadata": {
-    "size": 20, // default page limit defined by {{limi}}
+    "size": 20, // default page limit defined by {{limit}}
     "totalElements": 30, // total number of elements across all pages
     "totalPages": 2, // total pages
     "number": 1, // page number
