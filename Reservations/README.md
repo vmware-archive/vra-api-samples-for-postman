@@ -14,6 +14,8 @@ A reservation is a pool of resources for provisioning, consisting of several dif
    * Remove `createdDate`, `lastUpdated`, `version`, Update other values as required.
    * Call Update reservation sample with updated payload as modified in earlier steps.
 
+NOTE: When creating reservation, GUIDs for storagePath or networkPath needs to be lower cased.
+
 ### Reservation Policy
 
  * CRUD on reservation policy
